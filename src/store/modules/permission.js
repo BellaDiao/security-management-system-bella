@@ -60,6 +60,7 @@ const mutations = {
 //   return comp
 // }
 
+
 // const actions = {
 //   generateRoutes: async function ({ commit }, roles) {
 //   return new Promise(resolve => {

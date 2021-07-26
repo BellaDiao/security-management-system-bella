@@ -1,9 +1,11 @@
 import request from '@/utils/request'
 
-export function getRoutes() {
+export function getRoutes( data) {
   return request({
-    url: '/vue-element-admin/routes',
-    method: 'get'
+    // baseURL:'http://locolhost:3001', // 自己请求的路径前头
+    url: '/vue-element-admin/routes',// 自己请求的路径
+    method: 'get',
+    data
   })
 }
 
