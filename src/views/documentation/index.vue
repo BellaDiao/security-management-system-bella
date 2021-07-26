@@ -1,5 +1,6 @@
 <template>
   <div class="app-container documentation-container">
+
     <a class="document-btn" target="_blank" href="https://store.akveo.com/products/vue-java-admin-dashboard-spring?utm_campaign=akveo_store-Vue-Vue_demo%2Fgithub&utm_source=vue_admin&utm_medium=referral&utm_content=demo_English_button">Java后端集成</a>
     <a class="document-btn" target="_blank" href="https://panjiachen.github.io/vue-element-admin-site/">文档</a>
     <a class="document-btn" target="_blank" href="https://github.com/PanJiaChen/vue-element-admin/">Github Repository</a>
@@ -11,7 +12,7 @@
 
 <script>
 import DropdownMenu from '@/components/Share/DropdownMenu'
-
+ 
 export default {
   name: 'Documentation',
   components: { DropdownMenu },

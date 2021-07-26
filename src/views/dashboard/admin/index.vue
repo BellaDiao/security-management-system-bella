@@ -1,14 +1,19 @@
 <template>
   <div class="dashboard-editor-container">
-    <github-corner class="github-corner" />
 
-    <panel-group @handleSetLineChartData="handleSetLineChartData" />
+       <pan-thumb :image="avatar" style="float: left">
+        你的角色是:
+        <span v-for="item in roles" :key="item" class="pan-info-roles">{{ item }}</span>
+      </pan-thumb>
+    <!-- <github-corner class="github-corner" /> -->
 
-    <el-row style="background:#fff;padding:16px 16px 0;margin-bottom:32px;">
+    <!-- <panel-group @handleSetLineChartData="handleSetLineChartData" /> -->
+
+    <!-- <el-row style="background:#fff;padding:16px 16px 0;margin-bottom:32px;">
       <line-chart :chart-data="lineChartData" />
-    </el-row>
+    </el-row> -->
 
-    <el-row :gutter="32">
+ <!--    <el-row :gutter="32">
       <el-col :xs="24" :sm="24" :lg="8">
         <div class="chart-wrapper">
           <raddar-chart />
@@ -24,9 +29,9 @@
           <bar-chart />
         </div>
       </el-col>
-    </el-row>
+    </el-row>  -->
 
-    <el-row :gutter="8">
+   <!-- <el-row :gutter="8">
       <el-col :xs="{span: 24}" :sm="{span: 24}" :md="{span: 24}" :lg="{span: 12}" :xl="{span: 12}" style="padding-right:8px;margin-bottom:30px;">
         <transaction-table />
       </el-col>
@@ -35,8 +40,8 @@
       </el-col>
       <el-col :xs="{span: 24}" :sm="{span: 12}" :md="{span: 12}" :lg="{span: 6}" :xl="{span: 6}" style="margin-bottom:30px;">
         <box-card />
-      </el-col>
-    </el-row>
+      </el-col> 
+    </el-row> -->
   </div>
 </template>
 
