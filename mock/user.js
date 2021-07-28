@@ -24,7 +24,7 @@ const users = {
     // name: 'Normal Editor'
   },
   'bella-token': {
-    roles: ['bella'],
+    roles: ['admin,bella'],
     // introduction: 'I am an editor',
     // avatar: 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif',
     // name: 'Normal Editor'

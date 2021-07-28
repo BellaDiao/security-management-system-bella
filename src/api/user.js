@@ -4,7 +4,7 @@ import request from '@/utils/request'
 export function login(data) {
   return request({
     // baseURL:'',
-    // url: '/vue-element-admin/user/login',
+    // url: 'http://localhost:18000/plat/login',
     url: '/vue-element-admin/user/login',
     method: 'post',
     data

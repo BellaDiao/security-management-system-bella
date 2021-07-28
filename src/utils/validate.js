@@ -15,8 +15,9 @@ export function isExternal(path) {
  * @returns {Boolean}
  */
 export function validUsername(str) {
-  const valid_map = ['admin', 'editor','bella']
-  return valid_map.indexOf(str.trim()) >= 0
+  // const valid_map = ['admin', 'editor','bella']
+  // return valid_map.indexOf(str.trim()) >= 0
+  return str.trim().length> 0 // 先设置成只要有登录名
 }
 
 /**

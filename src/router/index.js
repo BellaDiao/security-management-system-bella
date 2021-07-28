@@ -71,7 +71,7 @@ export const constantRoutes = [
     component: () => import('@/views/error-page/401'),
     hidden: true
   },
-  {
+  {// 缺省路径
     path: '/',
     component: Layout,
     redirect: '/dashboard',

@@ -27,7 +27,7 @@ export function filterAsyncRoutes (routes, roles) {
   console.log("routes:", routes)
   routes.forEach(route => {
     const tmp = { ...route }
-    console.log("tmp:", tmp)
+    // console.log("tmp:", tmp)
 
     if (hasPermission(roles, tmp)) {
       if (tmp.children) {
@@ -73,6 +73,7 @@ const mutations = {
 //     // 这个getRoutes请求异步的，所以，程序运行到调用后，会继续往下走，而这个调用没有执行完，
 //     //所以是不能立马拿到数据。所以要把异步改为同步。
 //     let res =await getRoutes() // 异步改为同步
+//     debugger
 //     let myaccessedRoutes = res.data
 //     // 数据微调1：整理替换组件名称，2：删除空的children
 //     // 1、先在@\router\index.js中定义 componentMap 本地路由映射表
