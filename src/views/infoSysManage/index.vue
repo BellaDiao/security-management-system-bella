@@ -3,7 +3,8 @@
     <el-button plain @click="dbyb($event)">代办</el-button>
     <el-button plain @click="dbyb($event)">已办</el-button>
     <el-button style="align-self: center; float: right" @click.stop="search"
-      >搜索</el-button>
+      >搜索</el-button
+    >
     <el-input
       v-model="sxsearchInpt"
       class="search"
@@ -14,7 +15,7 @@
 
     <el-table :data="tableData" height="250" style="width: 100%">
       <el-table-column prop="xh" label="序号" width="180"> </el-table-column>
-      <el-table-column prop="author" label="来自" width="180"> </el-table-column>
+      <el-table-column prop="fm" label="来自" width="180"> </el-table-column>
       <el-table-column prop="title" label="标题"></el-table-column>
       <el-table-column prop="tp" label="类型" width="180"> </el-table-column>
       <el-table-column prop="receivtime" label="接收时间" width="180">
@@ -103,9 +104,7 @@
 </template>
 
 <script>
-import TabPane from './components/TabPane';
-import { dbybList } from '@/api/infoSysManage';
-
+import TabPane from './components/TabPane'
 import $ from 'jquery';
 export default {
   name: 'Tab',
@@ -115,59 +114,59 @@ export default {
       listQuery: {
         page: 1,
         limit: 20,
-        dbyb: undefined
+        dbyb: undefined 
       },
       tableData: [{
         receivtime: '2016-05-02',
-        author: '王小虎',
+        fm: '王小虎',
         title: '上海市普陀区金沙江路 1518 弄'
       }, {
         receivtime: '2016-05-04',
-        author: '王小虎',
+        fm: '王小虎',
         title: '上海市普陀区金沙江路 1517 弄'
 
       }, {
         receivtime: '2016-12-03',
-        author: '王小虎',
+        fm: '王小虎',
         title: '上海市普陀区金沙江路 1516 弄'
       }, {
         receivtime: '2016-03-02',
-        author: '王小虎',
+        fm: '王小虎',
         title: '上海市普陀区金沙江路 1518 弄'
       }, {
         receivtime: '2016-04-04',
-        author: '王小虎',
+        fm: '王小虎',
         title: '上海市普陀区金沙江路 1517 弄'
 
       }, {
         receivtime: '2016-01-03',
-        author: '王小虎',
+        fm: '王小虎',
         title: '上海市普陀区金沙江路 1516 弄'
       }, {
         receivtime: '2016-05-02',
-        author: '王小虎',
+        fm: '王小虎',
         title: '上海市普陀区金沙江路 1518 弄'
       }, {
         receivtime: '2016-05-04',
-        author: '王小虎',
+        fm: '王小虎',
         title: '上海市普陀区金沙江路 1517 弄'
 
       }, {
         receivtime: '2016-12-03',
-        author: '王大海',
+        fm: '王大海',
         title: '上海市普陀区金沙江路 1516 弄'
       }, {
         receivtime: '2016-03-02',
-        author: '王小虎',
+        fm: '王小虎',
         title: '上海市普陀区金沙江路 1518 弄'
       }, {
         receivtime: '2016-04-04',
-        author: '王小虎',
+        fm: '王小虎',
         title: '上海市普陀区金沙江路 1517 弄'
 
       }, {
         receivtime: '2016-01-03',
-        author: '王小虎',
+        fm: '王小虎',
         title: '上海市普陀区金沙江路 1516 弄'
       }],
       activeName: 'db',
@@ -204,16 +203,8 @@ export default {
     },
     dbyb (e) {
       console.log(e.target.innerHTML)
-      this.listQuery.dbyb=e.target.innerHTML;
-      dbybList(this.listQuery).then(response => {
-        this.tableData = response.data.items;
-        this.total = response.data.total;
-        console.log(this.tableData + '---' + this.total)
-        setTimeout(() => {
-        }, 1.5 * 1000)
-      })
-    }
 
+    }
   }
 }
 </script>

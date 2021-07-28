@@ -12,6 +12,7 @@ import chartsRouter from './modules/charts'
 import tableRouter from './modules/table'
 import nestedRouter from './modules/nested'
 
+
 /**
  * Note: sub-menu only appear when route children.length >= 1
  * Detail see: https://panjiachen.github.io/vue-element-admin-site/guide/essentials/router-and-nav.html
@@ -221,15 +222,26 @@ export const asyncRoutes = [
   //     }
   //   ]
   // },
-
+  // {
+  //   path: '/tab',
+  //   component: Layout,
+  //   children: [
+  //     {
+  //       path: 'index',
+  //       component: () => import('@/views/tab/index'),
+  //       name: 'Tab',
+  //       meta: { title: 'tab', icon: 'tab' }
+  //     }
+  //   ]
+  // },
   {
-    path: '/tab',
+    path: '/infoSysManage',
     component: Layout,
     children: [
       {
         path: 'index',
         component: () => import('@/views/tab/index'),
-        name: 'Tab',
+        name: 'infoSysManage',
         meta: { title: '信息系统管理', icon: 'tab' }
       }
     ]

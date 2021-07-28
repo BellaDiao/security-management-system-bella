@@ -26,9 +26,9 @@ const users = {
   },
   'bella-token': {
     roles: ['bella'],
-    introduction: 'I am bella',
-    avatar: 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif',
-    name: 'Normal user'
+    // introduction: 'I am bella',
+    // avatar: 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif',
+    // name: 'Normal user'
   }
 }
 
