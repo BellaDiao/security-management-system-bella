@@ -1,13 +1,26 @@
 <template>
   <div class="app-container">
     <aside>
-      The guide page is useful for some people who entered the project for the first time. You can briefly introduce the
-      features of the project. Demo is based on
-      <a href="https://github.com/kamranahmedse/driver.js" target="_blank">driver.js.</a>
+      The guide page is useful for some people who entered the project for the
+      first time. You can briefly introduce the features of the project. Demo is
+      based on
+      <a href="https://github.com/kamranahmedse/driver.js" target="_blank"
+        >driver.js.</a
+      >
     </aside>
-    <el-button icon="el-icon-question" type="primary" @click.prevent.stop="guide">
+    <el-button
+      icon="el-icon-question"
+      type="primary"
+      @click.prevent.stop="guide"
+    >
       Show Guide
     </el-button>
+    <el-button type="text" @click="dialogTableVisible = true"
+      >打开 Dialog</el-button
+    >
+    <el-dialog title="收货地址" :visible.sync="dialogTableVisible" v-dialogDrag>
+      基本可拖动弹框
+    </el-dialog>
   </div>
 </template>
 
@@ -18,18 +31,22 @@ import steps from './steps'
 
 export default {
   name: 'Guide',
-  data() {
+  data () {
     return {
-      driver: null
+      driver: null,
+      dialogTableVisible: false,
     }
   },
-  mounted() {
+  mounted () {
     this.driver = new Driver()
   },
   methods: {
-    guide() {
+    guide () {
       this.driver.defineSteps(steps)
       this.driver.start()
+    },
+    dialogShow () {
+
     }
   }
 }

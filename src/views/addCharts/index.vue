@@ -1,10 +1,13 @@
 <template>
   <div class="dashboard-container">
+    <el-button @click="update">update</el-button>
+
+    <div id="heatmap"></div>
+
     <div ref="bar" style="width: 600px; height: 400px"></div>
     <div ref="drawCharts" style="width: 600px; height: 400px"></div>
     <div ref="drawChaets2" style="width: 600px; height: 400px"></div>
     <div id="container"></div>
-    <div id="heatmap"></div>
 
     <div ref="line" style="width: 600px; height: 400px"></div>
   </div>
@@ -20,6 +23,7 @@ export default {
   components: {},
   data () {
     return {
+      heatmapPlot: '',
     }
   },
   computed: {
@@ -29,15 +33,19 @@ export default {
   },
   created () {
     this.$nextTick(function () {
+      this.heatmap();
       this.bar();
       this.drawCharts();
       this.cyt();
       this.line();
-      this.heatmap();
     })
 
   },
   methods: {
+    update () {
+      this.heatmapPlot.destroy();
+      this.heatmap()
+    },
     bar () {
       let myChart = echarts.init(this.$refs.bar);
       myChart.setOption({
@@ -327,28 +335,49 @@ export default {
       option && myChart.setOption(option);
     },
     cyt () {// 词云图
-      fetch('https://gw.alipayobjects.com/os/antfincdn/jPKbal7r9r/mock.json')
+      // fetch('https://gw.alipayobjects.com/os/antfincdn/jPKbal7r9r/mock.json')
+      //   .then((res) => res.json())
+      //   .then((data) => {
+      //     const wordCloud = new WordCloud('container', {
+      //       data,
+      //       wordField: 'x',
+      //       weightField: 'value',
+      //       color: '#122c6a',
+      //       wordStyle: {
+      //         fontFamily: 'Verdana',
+      //         fontSize: [24, 80],
+      //       },
+      //       // 设置交互类型
+      //       interactions: [{ type: 'element-active' }],
+      //       state: {
+      //         active: {
+      //           // 这里可以设置 active 时的样式
+      //           style: {
+      //             lineWidth: 3,
+      //           },
+      //         },
+      //       },
+      //     });
+
+      //     wordCloud.render();
+      //   });
+
+      fetch('https://gw.alipayobjects.com/os/antvdemo/assets/data/antv-keywords.json')
         .then((res) => res.json())
         .then((data) => {
           const wordCloud = new WordCloud('container', {
             data,
-            wordField: 'x',
+            wordField: 'name',
             weightField: 'value',
-            color: '#122c6a',
+            colorField: 'name',
             wordStyle: {
               fontFamily: 'Verdana',
-              fontSize: [24, 80],
+              fontSize: [8, 32],
+              rotation: 0,
             },
-            // 设置交互类型
-            interactions: [{ type: 'element-active' }],
-            state: {
-              active: {
-                // 这里可以设置 active 时的样式
-                style: {
-                  lineWidth: 3,
-                },
-              },
-            },
+            // 返回值设置成一个 [0, 1) 区间内的值，
+            // 可以让每次渲染的位置相同（前提是每次的宽高一致）。
+            random: () => 0.5,
           });
 
           wordCloud.render();
@@ -442,7 +471,6 @@ export default {
       option && myChart.setOption(option);
     },
     heatmap () {
-
       fetch('https://gw.alipayobjects.com/os/bmw-prod/68d3f380-089e-4683-ab9e-4493200198f9.json')
         .then((res) => res.json())
         .then((data) => {
@@ -451,7 +479,7 @@ export default {
               "name": "一般",
               "value": 54,
               "country": "AD"
-            },{
+            }, {
               "name": "高",
               "value": 70,
               "country": "AD"
@@ -475,7 +503,7 @@ export default {
               "value": 68,
               "country": "ACD"
             }]
-          const heatmapPlot = new Heatmap(document.getElementById('heatmap'), {
+          this.heatmapPlot = new Heatmap(document.getElementById('heatmap'), {
             data,
             xField: 'name',
             yField: 'country',
@@ -491,7 +519,9 @@ export default {
               },
             },
           });
-          heatmapPlot.render();
+          this.heatmapPlot.render();
+
+
         });
     }
   }
