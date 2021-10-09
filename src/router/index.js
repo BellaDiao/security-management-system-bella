@@ -188,10 +188,22 @@ export const asyncRoutes = [
     component: Layout,
     children: [
       {
-        path: 'index',
+        path: 'index/:page',
         component: () => import('@/views/addCharts/index'),
         name: 'addCharts',
         meta: { title: 'addCharts', icon: 'icon', noCache: true }
+      }
+    ]
+  },
+  {
+    path: '/searchTree',
+    component: Layout,
+    children: [
+      {
+        path: 'index/:page',
+        component: () => import('@/views/searchTree/index'),
+        name: 'searchTree',
+        meta: { title: 'searchTree', icon: 'icon', noCache: true }
       }
     ]
   },
@@ -394,6 +406,16 @@ export const asyncRoutes = [
     ]
   },
 
+  // {
+  //   path: 'router-link',
+  //   component: Layout,
+  //   name: 'myRouter',
+  //   meta: {
+  //     title: '我的路由',
+  //     requireAuth: true
+  //   }
+  // },
+
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
 ]
@@ -407,7 +429,7 @@ const createRouter = () => new Router({
 const router = createRouter()
 
 // Detail see: https://github.com/vuejs/vue-router/issues/1234#issuecomment-357941465
-export function resetRouter() {
+export function resetRouter () {
   const newRouter = createRouter()
   router.matcher = newRouter.matcher // reset router
 }

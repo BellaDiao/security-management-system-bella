@@ -1,14 +1,11 @@
 <template>
   <div class="dashboard-container">
     <el-button @click="update">update</el-button>
-
     <div id="heatmap"></div>
-
     <div ref="bar" style="width: 600px; height: 400px"></div>
     <div ref="drawCharts" style="width: 600px; height: 400px"></div>
     <div ref="drawChaets2" style="width: 600px; height: 400px"></div>
     <div id="container"></div>
-
     <div ref="line" style="width: 600px; height: 400px"></div>
   </div>
 </template>
@@ -38,13 +35,15 @@ export default {
       this.drawCharts();
       this.cyt();
       this.line();
+      // 路由参数接收
+      console.log("路由参数接收:",this.$route)
     })
 
   },
   methods: {
     update () {
       this.heatmapPlot.destroy();
-      this.heatmap()
+      this.heatmap();
     },
     bar () {
       let myChart = echarts.init(this.$refs.bar);
@@ -73,7 +72,7 @@ export default {
       let option = {
         title: {
           //标题内容
-          text: '高风险数：',
+          // text: '高风险数：',
           textStyle: {
             fontWeight: 'bold',
             fontFamily: 'Microsoft YaHei',
@@ -93,7 +92,7 @@ export default {
             top: '48%',
             style: {
               //value当前进度
-              text: '高风险数：' + value + '个',
+              text: '' + value + '个',
               textAlign: 'center',
               fill: '#000',
               fontSize: 28
@@ -116,7 +115,7 @@ export default {
         ],
         series: [{
           type: 'pie',
-          radius: ['70%', '64%'],//['外圆大小', '内圆大小']
+          radius: ['70%', '54%'],//['外圆大小', '内圆大小']
           center: ['50%', '50%'],//圆心位置['左右'， '上下']
           hoverAnimation: false,//取消鼠标悬停动画
           animationEasing: 'cubicOut',//设置动画缓动效果
