@@ -21,6 +21,45 @@ export default {
   data () {
     return {
       heatmapPlot: '',
+      myChart: '',
+
+      barOption: {
+        tooltip: {
+          trigger: 'axis',
+          axisPointer: {
+            type: 'shadow'
+          }
+        },
+        legend: {
+          data: ["正面", "反面"]
+        },
+        toolbox: {
+          show: true,
+          orient: 'vertical',
+          left: 'right',
+          top: 'center',
+          feature: {
+            mark: { show: true },
+            dataView: { show: true, readOnly: false },
+            magicType: { show: true, type: ['line', 'bar', 'stack'] },
+            restore: { show: true },
+            saveAsImage: { show: true }
+          }
+        },
+        xAxis: [
+          {
+            type: 'category',
+            axisTick: { show: false },
+            data: ['贴装']
+          }
+        ],
+        yAxis:
+          [{
+            type: 'value'
+          }
+          ],
+        series: []
+      },
     }
   },
   computed: {
@@ -35,8 +74,8 @@ export default {
       this.drawCharts();
       this.cyt();
       this.line();
-      // 路由参数接收
-      console.log("路由参数接收:",this.$route)
+     
+      console.log("路由参数接收:", this.$route); // 路由参数接收
     })
 
   },
@@ -46,22 +85,26 @@ export default {
       this.heatmap();
     },
     bar () {
-      let myChart = echarts.init(this.$refs.bar);
-      myChart.setOption({
-        title: {
-          text: 'ECharts 入门示例'
-        },
-        tooltip: {},
-        xAxis: {
-          data: ['衬衫', '羊毛衫', '雪纺衫', '裤子', '高跟鞋', '袜子']
-        },
-        yAxis: {},
-        series: [{
-          name: '销量',
+      this.myChart = echarts.init(this.$refs.bar);
+      var name1 = ["正面", "反面"]
+      var data1 = [222, 444]
+      this.barOption.series = []
+      for (let i in name1) {
+        let obj = {
+          name: '',
           type: 'bar',
-          data: [5, 20, 36, 10, 10, 20]
-        }]
-      });
+          barGap: 0,
+          emphasis: {
+            focus: 'series'
+          },
+          data: []
+        }
+        obj.name = name1[i]
+        obj.data.push(data1[i])
+
+        this.barOption.series.push(obj)
+      }
+      this.myChart.setOption(this.barOption)
     },
     drawCharts () {// 环形图
       //https://www.136.la/jingpin/show-157914.html
@@ -523,6 +566,7 @@ export default {
 
         });
     }
+
   }
 }
 </script>

@@ -50,7 +50,7 @@ module.exports = {
   },
   chainWebpack(config) {
     // it can improve the speed of the first screen, it is recommended to turn on preload
-    // it can improve the speed of the first screen, it is recommended to turn on preload
+    // 它可以提高第一屏的速度，建议开启预加载
     config.plugin('preload').tap(() => [
       {
         rel: 'preload',
@@ -62,6 +62,7 @@ module.exports = {
     ])
 
     // when there are many pages, it will cause too many meaningless requests
+    // 当页面太多时，会导致太多无意义的请求
     config.plugins.delete('prefetch')
 
     // set svg-sprite-loader
