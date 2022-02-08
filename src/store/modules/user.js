@@ -30,14 +30,18 @@ const mutations = {
 
 const actions = {
   // 用户登录
-  login({ commit }, userInfo) {
-    console.log("userInfo:",JSON.stringify(userInfo))//=>userInfo: {"username":"admin","password":"111111"}
+  login ({ commit }, userInfo) {
+
+    console.log("userInfo:", JSON.stringify(userInfo))//=>userInfo: {"username":"admin","password":"111111"}
     const { username, password } = userInfo
+    console.log("username:", username)
+    console.log("password:", password)
+
     return new Promise((resolve, reject) => {
-       // 调用 api/user.js中封装的 login数据请求方法
+      // 调用 api/user.js中封装的 login数据请求方法
       login({ username: username.trim(), password: password }).then(response => {
         debugger
-        console.log("response:",JSON.stringify(response)) //=>response: {"code":20000,"data":{"token":"admin-token"}}
+        console.log("response:", JSON.stringify(response)) //=>response: {"code":20000,"data":{"token":"admin-token"}}
         const { data } = response
         commit('SET_TOKEN', data.token)
         setToken(data.token)
@@ -50,7 +54,7 @@ const actions = {
   },
 
   // 得到用户信息
-  getInfo({ commit, state }) {
+  getInfo ({ commit, state }) {
     return new Promise((resolve, reject) => {
       getInfo(state.token).then(response => {
         const { data } = response
@@ -78,7 +82,7 @@ const actions = {
   },
 
   // 用户退出
-  logout({ commit, state, dispatch }) {
+  logout ({ commit, state, dispatch }) {
     return new Promise((resolve, reject) => {
       logout(state.token).then(() => {
         commit('SET_TOKEN', '')
@@ -98,7 +102,7 @@ const actions = {
   },
 
   // remove token
-  resetToken({ commit }) {
+  resetToken ({ commit }) {
     return new Promise(resolve => {
       commit('SET_TOKEN', '')
       commit('SET_ROLES', [])
@@ -108,7 +112,7 @@ const actions = {
   },
 
   // dynamically modify permissions
-  async changeRoles({ commit, dispatch }, role) {
+  async changeRoles ({ commit, dispatch }, role) {
     const token = role + '-token'
 
     commit('SET_TOKEN', token)

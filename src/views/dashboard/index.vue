@@ -1,20 +1,25 @@
 <template>
   <div class="dashboard-container">
-    <component :is="currentRole" />
+    <Carousel />
+    <div style="display: flex">
+      <div style="flex: 1"><CarouselPic /></div>
+       <div style="flex: 1"><Notice /></div>
+    </div>
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
-import adminDashboard from './admin'
-import editorDashboard from './editor'
+import Carousel from './components/Carousel'
+import CarouselPic from './components/CarouselPic'
+import Notice from './components/Notice'
 
 export default {
   name: 'Dashboard',
-  components: { adminDashboard, editorDashboard },
-  data() {
+  components: { Carousel, CarouselPic, Notice },
+  data () {
     return {
-      currentRole: 'adminDashboard'
+      // currentRole: 'adminDashboard'
     }
   },
   computed: {
@@ -22,10 +27,15 @@ export default {
       'roles'
     ])
   },
-  created() {
-    if (!this.roles.includes('admin')) {
-      this.currentRole = 'editorDashboard'
-    }
+  created () {
+    // if (!this.roles.includes('admin')) {
+    //   this.currentRole = 'editorDashboard'
+    // }
   }
 }
 </script>
+<style>
+.bkgrd {
+  background-color: royalblue;
+}
+</style>

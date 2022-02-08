@@ -1,8 +1,11 @@
 <template>
   <div class="dashboard-container">
+   
     <el-button @click="update">update</el-button>
     <div id="heatmap"></div>
-    <div ref="bar" style="width: 600px; height: 400px"></div>
+    <div ref="zhuRef" style="width: 600px; height: 400px"></div>
+    <div ref="zhuRef2" style="width: 600px; height: 400px"></div>
+
     <div ref="drawCharts" style="width: 600px; height: 400px"></div>
     <div ref="drawChaets2" style="width: 600px; height: 400px"></div>
     <div id="container"></div>
@@ -15,6 +18,9 @@ import { mapGetters } from 'vuex'
 import * as echarts from 'echarts';
 import { WordCloud } from '@antv/g2plot';
 import { Heatmap } from '@antv/g2plot';
+import Axios from 'axios';
+// import { smtData} from '../../api/addCharts'
+
 export default {
   name: 'echarts',
   components: {},
@@ -22,8 +28,46 @@ export default {
     return {
       heatmapPlot: '',
       myChart: '',
-
-      barOption: {
+      myChart2: '',
+      $url: 'http://localhost:3001',
+      zhuOption: {
+        tooltip: {
+          trigger: 'axis',
+          axisPointer: {
+            type: 'shadow'
+          }
+        },
+        legend: {
+          data: ["正面", "反面"]
+        },
+        toolbox: {
+          show: true,
+          orient: 'vertical',
+          left: 'right',
+          top: 'center',
+          feature: {
+            mark: { show: true },
+            dataView: { show: true, readOnly: false },
+            magicType: { show: true, type: ['line', 'bar', 'stack'] },
+            restore: { show: true },
+            saveAsImage: { show: true }
+          }
+        },
+        xAxis: [
+          {
+            type: 'category',
+            axisTick: { show: false },
+            data: ['贴装']
+          }
+        ],
+        yAxis:
+          [{
+            type: 'value'
+          }
+          ],
+        series: []
+      },
+      zhuOption2: {
         tooltip: {
           trigger: 'axis',
           axisPointer: {
@@ -70,26 +114,104 @@ export default {
   created () {
     this.$nextTick(function () {
       this.heatmap();
-      this.bar();
+      this.zhu1();
+      this.zhu2();
+
       this.drawCharts();
       this.cyt();
       this.line();
-     
+
       console.log("路由参数接收:", this.$route); // 路由参数接收
     })
 
   },
   methods: {
+
     update () {
       this.heatmapPlot.destroy();
       this.heatmap();
     },
-    bar () {
-      this.myChart = echarts.init(this.$refs.bar);
+    zhu1 () {
+      this.myChart = echarts.init(this.$refs.zhuRef);
       var name1 = ["正面", "反面"]
       var data1 = [222, 444]
-      this.barOption.series = []
+      this.zhuOption.series = [];
+
       for (let i in name1) {
+        let obj = {
+          name: '',
+          type: 'bar',
+          zhuGap: 0,
+          emphasis: {
+            focus: 'series'
+          },
+          data: []
+        }
+        obj.name = name1[i]
+        obj.data.push(data1[i])
+
+        this.zhuOption.series.push(obj)
+      }
+      this.myChart.setOption(this.zhuOption)
+    },
+    zhu2 () {
+      var smtRateList = [{
+        key: "1月",
+        srayratio: 100,
+        smtratio: 1,
+        sqratio: 50,
+        sbratio: 46,
+        pyratio: 31,
+        reratio: 49,
+      }, {
+        key: "2月",
+        srayratio:50,
+        smtratio: 14,
+        sqratio: 100,
+        sbratio: 16,
+        pyratio: 41,
+        reratio: 46,
+      }, {
+        key: "3月",
+        srayratio:30,
+        smtratio: 13,
+        sqratio: 60,
+        sbratio: 12,
+        pyratio: 62,
+        reratio: 11,
+      }];
+      var smtName = []
+      var srayratio = []
+      var smtratio = []
+      var sqratio = []
+      var sbratio = []
+      var pyratio = []
+      var reratio = []
+
+      for (let i = 0; i < smtRateList.length; i++) {
+        debugger
+        smtName.push(smtRateList[i].key)
+        srayratio.push(smtRateList[i].srayratio)
+        sqratio.push(smtRateList[i].sqratio)
+        sbratio.push(smtRateList[i].sbratio)
+
+        smtratio.push(smtRateList[i].smtratio)
+        pyratio.push(smtRateList[i].pyratio)
+        reratio.push(smtRateList[i].reratio)
+
+      }
+      console.log("smtName", smtName)
+      console.log("srayratio", srayratio)
+      console.log("sqratio", sqratio)
+      console.log("sbratio", sbratio)
+      console.log("smtratio", smtratio)
+      console.log("pyratio", pyratio)
+      console.log("reratio", reratio)
+
+      this.myChart2 = echarts.init(this.$refs.zhuRef2);
+      this.zhuOption2.series = [];
+
+      for (let i in smtName) {
         let obj = {
           name: '',
           type: 'bar',
@@ -99,12 +221,12 @@ export default {
           },
           data: []
         }
-        obj.name = name1[i]
-        obj.data.push(data1[i])
+        obj.name = smtName[i]
+        obj.data.push(srayratio[i])
 
-        this.barOption.series.push(obj)
+        this.zhuOption2.series.push(obj)
       }
-      this.myChart.setOption(this.barOption)
+      this.myChart2.setOption(this.zhuOption2)
     },
     drawCharts () {// 环形图
       //https://www.136.la/jingpin/show-157914.html
